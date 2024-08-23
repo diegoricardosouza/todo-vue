@@ -10,7 +10,14 @@ export default createStore({
       state.todos = payload
     },
     storeTodo(state, payload) {
-      state.todos.unshift(payload)
+      const index = state.todos.findIndex(todo => todo.id === payload.id)
+
+      if (index >= 0) {
+        state.todos.splice(index, 1, payload)
+      } else {
+        state.todos.unshift(payload)
+      }
+
     }
   },
   actions: {
@@ -21,6 +28,11 @@ export default createStore({
 
     async addTodo({ commit }, data) {
       const response = await axios.post('http://localhost:3000/todos', data)
+      return commit('storeTodo', response.data)
+    },
+
+    async updateTodo({ commit }, { id, data}) {
+      const response = await axios.put(`http://localhost:3000/todos/${id}`, data)
       return commit('storeTodo', response.data)
     }
   }
