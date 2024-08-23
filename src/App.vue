@@ -20,26 +20,22 @@
   <!-- <RouterView /> -->
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+import { useStore } from 'vuex';
 import TodoEmpty from './components/TodoEmpty.vue';
 import TodoFormAdd from './components/TodoFormAdd.vue';
 import TodoItems from './components/TodoItems.vue';
 import TodoSpinner from './components/TodoSpinner.vue';
 
-export default {
-  name: 'App',
-  components: {TodoEmpty, TodoFormAdd, TodoItems, TodoSpinner},
-  data() {
-    return {
-      loading: false
-    }
-  },
-  async created() {
-    this.loading = true;
-    await this.$store.dispatch('getTodos')
-    this.loading = false;
-  }
-}
+const store = useStore();
+
+const loading = ref(false);
+
+loading.value = true;
+store.dispatch('getTodos').finally(() => {
+  loading.value = false;
+})
 
 // import { RouterView } from 'vue-router'
 </script>

@@ -16,26 +16,24 @@
   </form>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        title: ''
-      }
-    },
-    methods: {
-      async addTodo() {
-        if(!this.title) {
-          return;
-        }
+<script setup>
+import { ref } from 'vue';
+import { useStore } from 'vuex';
 
-        await this.$store.dispatch('addTodo', {
-          title: this.title,
-          completed: false
-        })
+  const title = ref('')
+  const store = useStore();
 
-        this.title = ''
-      }
+  async function addTodo() {
+    if(!title.value) {
+      return;
     }
+
+    await store.dispatch('addTodo', {
+      title: title.value,
+      completed: false
+    })
+
+    title.value = ''
   }
+
 </script>

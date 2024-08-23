@@ -1,9 +1,9 @@
 {
   "todos": [
     {
-      "id": "9874",
       "title": "Estudar Vue",
-      "completed": false
+      "completed": true,
+      "id": "9874"
     },
     {
       "id": "3f02",
@@ -11,9 +11,9 @@
       "completed": false
     },
     {
-      "id": "083e",
-      "title": "sasdfas",
-      "completed": false
+      "title": "fasdfdsaasfsaf",
+      "completed": true,
+      "id": "97d3"
     }
   ]
 }
