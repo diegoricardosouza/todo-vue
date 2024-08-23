@@ -30,7 +30,10 @@ mr-2">
 
       <div class="ml-auto flex items-center
 justify-center">
-        <button class="focus:outline-none">
+        <button
+          class="focus:outline-none"
+          @click="onDelete"
+        >
           <svg class="ml-3 h-4 w-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path d="M19 7L18.1327 19.1425C18.0579
@@ -92,6 +95,10 @@ export default {
       }
 
       this.$store.dispatch('updateTodo', payload);
+    },
+
+    onDelete() {
+      this.$store.dispatch('deleteTodo', this.todo.id)
     }
   }
 }
